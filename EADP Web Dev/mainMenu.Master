@@ -1,0 +1,465 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mainMenu.master.cs" Inherits="EADP_Web_Dev.mainMenu" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript"
+            src="<%= Page.ResolveClientUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/Main/main.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/bootstrap.min.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/Custom/mdb.min.js") %>"></script>
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/MaterialDesignLite/material.min.js") %>"></script>
+    <script src="<%= Page.ResolveClientUrl("~/Scripts/popper.min.js") %>" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<%= Page.ResolveClientUrl("~/Content/font-awesome.min.css") %>" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="<%= Page.ResolveClientUrl("~/Content/bootstrap.min.css") %>"/>
+    <link rel="stylesheet" href="<%= Page.ResolveClientUrl("~/CSS/MasterStyle.css") %>"/>
+    <link rel="stylesheet" href="<%= Page.ResolveClientUrl("~/CSS/materialicon.css") %>"/>
+    <%--   <link rel="stylesheet" href="<%= Page.ResolveClientUrl("~/CSS/MaterialDesignLite/material.min.css") %>"/>--%>
+    <link rel="stylesheet" href="<%= Page.ResolveClientUrl("~/CSS/mdb.min.css") %>"/>
+    <link rel="stylesheet" href="<%= Page.ResolveClientUrl("~/CSS/Materialize/materialize.min.css") %>"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <title></title>
+    <script type="text/javascript">
+
+        $(function() {
+
+
+/*            chathub.client.addNotify = function(message) {
+                console.log("CONFIRM Test + " + message.sender);
+                $("#modalContentP").html("Patient " + message.sender + " requested to have a conference with you.");
+                $("#pMailHidden").val(message.sender);
+                $("#modalChatInvite").modal({
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '4%', // Starting top style attribute
+                    endingTop: '10%', // Ending top style attribute
+                    ready:
+                        function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                            console.log(modal, trigger);
+                        },
+                });
+                $("#modalChatInvite").modal('open');
+            };*/
+
+/*            chathub1.client.getPmessages = function(message) {
+                console.log(window.location.pathname);
+                if (window.location.pathname !== '/web/Consultation/Chat.aspx') {
+                    $.ajax({
+
+                        type: "POST",
+
+                        url: "default.aspx/GetData",
+
+                        contentType: "application/json; charset=utf-8",
+
+                        dataType: "json",
+
+                        success: function (response) {
+
+                            $("#Content").text(response.d);
+
+                        },
+
+                        failure: function (response) {
+
+                            alert(response.d);
+
+                        }
+
+                    });
+                }
+            }*/
+
+            $("#signupdditem").click(function() {
+/*                $('#loginRegisterModal').modal({
+                    keyboard: false
+                })
+                $("#loginRegisterModal").modal('show');*/
+                $("#loginRegisterModal div div div ul").tabs('select_tab', 'panel8');
+            });
+
+            $("li").click(function() {
+                $("li").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $('.button-collapse').sideNav();
+            $("#lbtnSignup").click(function() {
+                Refresh();
+                Materialize.updateTextFields();
+            });
+
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15, // Creates a dropdown of 15 years to control year,
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Ok',
+                closeOnSelect: false // Close upon selecting a date,
+            });
+
+            $("#TB_regDOBs").change(function() {
+                Refresh();
+                $("#TB_regDOBs").attr("aria-expanded", "true");
+                $("#TB_regDOBs").attr("class", "datepicker validate picker__input picker__input--active");
+            });
+
+        });
+
+        function Refresh() {
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15, // Creates a dropdown of 15 years to control year,
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Ok',
+                closeOnSelect: false // Close upon selecting a date,
+            });
+        }
+    </script>
+    <style>
+        #dropdownFinance { width: 140px !important; }
+
+        .dropdownNotis {
+            width: 300px !important;
+            height: 300px !important;
+        }
+    </style>
+    <nav class="indigo lighten-1" role="navigation">
+        <div class="nav-wrapper container" style="width: 100%;">
+            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <asp:HyperLink runat="server" NavigateUrl="~/web/default.aspx" Text="Home"/>
+                </li>
+                                <li>
+                    <a id="CommunityHyperLinks" class="dropdown-button" data-activates="dropdownCommunitynm" href="#" runat="server">Community<i class='material-icons right'>arrow_drop_down</i></a>
+                    <ul id="dropdownCommunitynm" class="dropdown-content" style="width: 120px !important; top: 65px !important;">
+                        <p class="dropdown-header">Event</p>
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/CommunityEvent/CommunityEvent.aspx" Text="Community"/>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/AdminEvent/CourseMain.aspx" Text="Course"/>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/AdminEvent/Booking.aspx" Text="Booking"/>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/AdminEvent/SignUpCourse.aspx" Text="Course SignUp"/>
+                        </li>
+                        <li class="divider"></li>
+                        <li id="courseadminli" runat="server">
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/AdminEvent/CourseAdmin.aspx" Text="Admin"/>
+                        </li>
+                        <li id="bookadminli" runat="server">
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/AdminEvent/BookingAdmin.aspx" Text="Booking Admin"/>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="ClinicHyperLinks" class="dropdown-button" data-activates="dropdownClinicnm" href="#" runat="server">Clinic<i class='material-icons right'>arrow_drop_down</i></a>
+                    <ul id="dropdownClinicnm" class="dropdown-content" style="top: auto !important;">
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/Consultation/Consultation.aspx" Text="Consultation"/>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/Medicine/Medicine_Shop.aspx" Text="Pharmacy"/>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~" Text="Health Report"/>
+                        </li>
+                    </ul>
+                </li>
+                <li runat="server" id ="financeDD">
+                    <a id="A1" class="dropdown-button" data-activates="dropdownFinances" href="#" runat="server">Finance<i class='material-icons right'>arrow_drop_down</i></a>
+                    <ul id="dropdownFinances" class="dropdown-content" style="width: 140px !important; top: 65px !important;">
+                        <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/web/Finance/Tracker.aspx" data-activates="dropdownFinance" CssClass="dropdown-button" Text="Finance"/>
+                        </li>
+                        <li>
+                            <asp:HyperLink runat="server" NavigateUrl="~/web/Finance/Statistics.aspx" data-activates="dropdownFinance" CssClass="dropdown-button" Text="Statistics"/>
+                        </li>
+                        <li class="divider"></li>
+                        <li runat="server" id="financeadmminli">
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/Finance/ADMIN/Schemes.aspx" Text="Schemes"/>
+                        </li>
+                        <li runat="server" id="Approvalli">
+                            <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/Finance/ADMIN/Approval.aspx" Text="Approval"/>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="dropdown-button" data-activates="dropdownNoti" runat="server" OnServerClick="dropdownnoti_OnServerClick">
+                        <i class="material-icons"> notifications </i> <span class="badge" runat="server" id="nofNotispan"></span>
+                    </a>
+
+                </li>
+                <li>
+                    <a class="dropdown-button" data-activates="dropdownaccnm">
+                        <i class="material-icons"> person </i>
+                    </a>
+                    <ul id="dropdownaccnm" class="dropdown-content" style="top: auto !important;">
+                        <div ID="bLogin" runat="server">
+                            <li>
+                                <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light white-text" Text="Login" data-toggle="modal" data-target="#loginRegisterModal"/>
+                            </li>
+                            <li id="signupdditem">
+                                <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light white-text" Text="Sign up" data-toggle="modal" data-target="#loginRegisterModal"/>
+                            </li>
+                        </div>
+                        <div ID="aLogin" runat="server">
+                            <li>
+                                <asp:HyperLink runat="server" CssClass="dropdown-item waves-effect waves-light" NavigateUrl="~/web/Profile.aspx" Text="Profile"/>
+                            </li>
+                            <li>
+                                <button class="dropdown-item waves-effect waves-light" ID="logoutbtn" OnServerClick="logoutBtn_OnClick" runat="server"> Logout </button>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</head>
+<body>
+<form id="form1" runat="server">
+
+    <asp:ScriptManager runat="server" ID="ScriptManager" EnablePartialRendering="True" EnablePageMethods="True">
+        <Scripts>
+            <asp:ScriptReference Path="Scripts/jquery-3.3.1.min.js"/>
+        </Scripts>
+    </asp:ScriptManager>
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+
+            <ul id="dropdownNoti" class="dropdown-content" style="top: auto !important; max-height: 300px !important; height: 300px !important; overflow: auto; width: 400px !important;" runat="server">
+
+            </ul>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <div>
+        <div class="modal fade show" id="loginRegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none; padding-right: 17px;" aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+                <!--Content-->
+                <div class="modal-content">
+
+                    <!--Modal cascading tabs-->
+                    <div class="modal-c-tabs">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tabs-2 indigo darken-4" role="tablist">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-toggle="tab" style="color: white" href="#panel7" role="tab" aria-selected="true">
+                                    <i class="fa fa-user mr-1"></i> Login
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-toggle="tab" href="#panel8" style="color: white" role="tab" aria-selected="false">
+                                    <i class="fa fa-user-plus mr-1"></i> Register
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Tab panels -->
+                        <div class="tab-content">
+                            <!--Panel 7-->
+                            <div class="tab-pane fadeIn active show" id="panel7" role="tabpanel">
+                                <!--Body-->
+                                <div class="modal-body mb-1">
+                                    <asp:UpdatePanel runat="server" ID="upnlLogin" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="fa fa-envelope prefix"></i>
+                                                    <asp:TextBox runat="server" ValidationGroup="loginVG" CausesValidation="True" ID="TB_loginEmail" CssClass="validate" TextMode="Email"></asp:TextBox>
+                                                    <asp:Label ID="lblLoginEmail" AssociatedControlID="TB_loginEmail" runat="server" data-error="wrong" data-success="" Text="Your email"></asp:Label>
+                                                    <asp:CustomValidator ID="loginemailCV" runat="server" ValidationGroup="loginVG" ControlToValidate="TB_loginEmail" ValidateEmptyText="True" OnServerValidate="loginemailCV_OnServerValidate" Text="" ForeColor="red"></asp:CustomValidator>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="fa fa-lock prefix"></i>
+                                                    <asp:TextBox runat="server" ValidationGroup="loginVG" ID="TB_loginPw" CssClass="validate" TextMode="Password" CausesValidation="false"></asp:TextBox>
+                                                    <asp:Label ID="lblLoginPW" AssociatedControlID="TB_loginPW" runat="server" data-error="wrong" data-success="" Text="Your Password"></asp:Label>
+                                                    <asp:CustomValidator ID="loginpwCV" runat="server" ValidationGroup="loginVG" ValidateEmptyText="True" ControlToValidate="TB_loginPw" OnServerValidate="loginPW_ServerValidation" Text="" ForeColor="red"></asp:CustomValidator>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-2">
+                                                <asp:LinkButton runat="server" ID="LoginBtn" ValidationGroup="loginVG" CssClass="btn indigo accent-4 waves-effect waves-light" Text='Login <i class="fa fa-sign-in ml-1"></i>' OnClick="Login"/>
+                                            </div>
+                                            <div class="row">
+                                                <asp:ValidationSummary runat="server" ValidationGroup="loginVG" ForeColor="red"/>
+                                            </div>
+                                        </ContentTemplate>
+
+                                    </asp:UpdatePanel>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn indigo accent-4 btn-outline-info waves-effect white-text" data-dismiss="modal">Close</button>
+                                </div>
+                                <%--  --%>
+                            </div>
+                            <!--/.Panel 7-->
+
+                            <!--Panel 8-->
+                            <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="fa fa-envelope prefix"></i>
+                                                    <asp:TextBox runat="server" CausesValidation="True" ID="TB_regEmail" CssClass="validate" ValidationGroup="RegisterGroup" TextMode="Email"/>
+                                                    <asp:Label ID="lblregEmail" AssociatedControlID="TB_regEmail" runat="server" data-error="wrong" data-success="" Text="Enter your email"></asp:Label>
+                                                    <asp:CustomValidator runat="server" ID="emailCV" ControlToValidate="TB_regEmail" OnServerValidate="emailCV_OnServerValidate" ValidationGroup="RegisterGroup" ForeColor="red" ValidateEmptyText="True"/>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row formRow">
+                                                <div class="input-field col s6">
+                                                    <i class="fa fa-lock prefix"></i>
+                                                    <asp:TextBox runat="server" CausesValidation="True" ID="TB_regPW" CssClass="validate" TextMode="Password" ValidationGroup="RegisterGroup"/>
+                                                    <asp:Label ID="lblregPW" AssociatedControlID="TB_regPW" runat="server" data-error="wrong" data-success="" Text="Your Password"></asp:Label>
+                                                    <asp:CustomValidator runat="server" ID="regPWCV" ControlToValidate="TB_regPW" OnServerValidate="regPWCV_OnServerValidate" ValidationGroup="RegisterGroup" ForeColor="red" ValidateEmptyText="True"/>
+                                                </div>
+
+                                                <div class="input-field col s6">
+                                                    <i class="fa fa-lock prefix"></i>
+                                                    <asp:TextBox runat="server" CausesValidation="True" ID="TB_regRepeatPW" CssClass="validate" TextMode="Password" ValidationGroup="RegisterGroup"></asp:TextBox>
+                                                    <asp:Label ID="lblregPWrepeat" AssociatedControlID="TB_regRepeatPW" runat="server" data-error="wrong" data-success="" Text="Repeat Password"></asp:Label>
+                                                    <asp:CustomValidator runat="server" ID="regRPWCV" ControlToValidate="TB_regRepeatPW" OnServerValidate="regRPWCV_OnServerValidate" ValidationGroup="RegisterGroup" ForeColor="red" ValidateEmptyText="True"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="fa fa-user prefix"></i>
+                                                    <asp:TextBox runat="server" ID="TB_regFirstName" ValidationGroup="RegisterGroup"></asp:TextBox>
+                                                    <asp:Label ID="lblregFirstName" AssociatedControlID="TB_regFirstName" runat="server" data-error="wrong" data-success="" Text="Enter your first name"></asp:Label>
+                                                    <asp:CustomValidator runat="server" ID="regFNCV" ControlToValidate="TB_regFirstName" OnServerValidate="regFNCV_OnServerValidate" ValidationGroup="RegisterGroup" ForeColor="red" ValidateEmptyText="True"/>
+                                                </div>
+
+                                                <div class="input-field col s6">
+                                                    <asp:TextBox runat="server" ID="TB_regLastName" ValidationGroup="RegisterGroup"></asp:TextBox>
+                                                    <asp:Label ID="lblregLastName" AssociatedControlID="TB_regLastName" runat="server" data-error="wrong" data-success="" Text="Enter your last name"></asp:Label>
+                                                    <asp:CustomValidator runat="server" ID="regLNCV" ControlToValidate="TB_regLastName" OnServerValidate="regLNCV_OnServerValidate" ValidationGroup="RegisterGroup" ForeColor="red" ValidateEmptyText="True"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-field col s6">
+                                                <i class="fa fa-mobile fa-5x prefix"></i>
+                                                <asp:TextBox runat="server" ID="TB_regMobile" CssClass="form-control" TextMode="Phone" ValidationGroup="RegisterGroup"></asp:TextBox>
+                                                <asp:Label ID="lblregMobile" AssociatedControlID="TB_regMobile" runat="server" data-error="wrong" data-success="" Text="Enter your Mobile"></asp:Label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <i class="fa fa-calendar-o prefix"></i>
+                                                <asp:Label ID="lblregDOB" AssociatedControlID="TB_regDOBs" runat="server" data-error="wrong" data-success="" Text="choose a date"></asp:Label>
+                                                <asp:TextBox runat="server" ID="TB_regDOBs" CssClass="datepicker" CausesValidation="True" ValidationGroup="RegisterGroup"></asp:TextBox>
+                                                <asp:CustomValidator runat="server" ID="regDOBCV" ControlToValidate="TB_regDOBs" ValidateEmptyText="True" OnServerValidate="regDOBCV_OnServerValidate" ForeColor="red" ValidationGroup="RegisterGroup"/>
+
+                                            </div>
+
+                                            <div class="text-center form-sm mt-2">
+                                                <asp:LinkButton ID="lbtnSignup" runat="server" CssClass="btn waves-effect waves-light indigo accent-4" Text='SignUp <i class="fa fa-sign-in ml-1"></i>' ValidationGroup="RegisterGroup" OnClick="SignUp"/>
+                                            </div>
+
+                                            <div class="form-sm mt-2">
+                                                <asp:ValidationSummary runat="server" ValidationGroup="RegisterGroup" ForeColor="red" DisplayMode="BulletList"/>
+                                            </div>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-info waves-effect white-text indigo accent-4" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            <!--/.Panel 8-->
+                        </div>
+
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
+        <div id="modalChatInvite" class="modal">
+            <div class="modal-content">
+                <h4>Conversation</h4>
+                <p id="modalContentP" runat="server"></p>
+                <input runat="server" type="hidden" id="pMailHidden"/>
+            </div>g
+            <div class="modal-footer">
+                <asp:Button runat="server" Text="Agree" CssClass="modal-action modal-close waves-effect waves-green btn-flat" ID="btnAgree" OnClick="btnAgree_OnClick"/>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+        </asp:ContentPlaceHolder>
+    </div>
+
+</form>
+<!-- chatbot -->
+<div>
+    <script>
+        (function() {
+            var div = document.createElement("div");
+            document.getElementsByTagName('body')[0].appendChild(div);
+            div.outerHTML =
+                "<div id='botDiv' style='height: 38px; position: fixed; bottom: 0; z-index: 1000; background-color: #fff'><div id='botTitleBar' class='indigo lighten-1' style='height: 38px; width: 400px; position:fixed; cursor: pointer;'><span class='white-text'>Chat</span></div><iframe width='400px' height='100%' src='https://webchat.botframework.com/embed/MedicineBot?s=Z2Zu2I_J_p0.cwA.tjI.uzgJzhqkqaBUT659aum_Q2ilpy9wN4zE1MSAN0L_eio'></iframe></div>"
+            document.querySelector('body').addEventListener('click',
+                function(e) {
+                    e.target.matches = e.target.matches || e.target.msMatchesSelector;
+                    if (e.target.matches('#botTitleBar')) {
+                        var botDiv = document.querySelector('#botDiv');
+                        botDiv.style.height = botDiv.style.height == '600px' ? '38px' : '600px';
+                    };
+                });
+        }());
+    </script>
+
+</div>
+<footer class="page-footer indigo lighten-1">
+
+    <%--    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>--%>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2018 Copyright: Enterprise Application Development & Projects
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+</body>
+<script src="<%= Page.ResolveClientUrl("~/Scripts/Custom/jquery-2.1.1.min.js") %>"></script>
+
+<script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/Materialize/materialize.min.js") %>"></script>
+<script type="text/javascript" src="<%= Page.ResolveClientUrl("~/Scripts/jquery.signalR-2.2.2.min.js") %>"></script>
+<script src="<%= Page.ResolveClientUrl("/signalr/js") %>"></script>
+</html>
